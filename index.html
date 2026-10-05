@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeekZone | Tecnologia e Cultura Geek</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="topo">
+        <a class="logo" href="index.html">🎮 GeekZone</a>
+
+        <div class="acoes-topo">
+            <button id="botaoTema" class="botao-secundario" type="button">
+                🌙 <span id="textoTema">Modo Claro</span>
+            </button>
+
+            <button id="abrirCarrinho" class="botao-principal" type="button">
+                🛒 Carrinho (<span id="quantidadeCarrinho">0</span>)
+                <span id="valorTopo">R$ 0,00</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div>
+                <p class="sobretitulo">SEU UNIVERSO GEEK COMEÇA AQUI</p>
+                <h1>Tecnologia, jogos e colecionáveis em um só lugar.</h1>
+                <p>Encontre seus favoritos e prepare-se para a próxima aventura.</p>
+            </div>
+            <div class="hero-emoji" aria-hidden="true">🎮✨</div>
+        </section>
+
+        <section class="catalogo">
+            <div class="cabecalho-catalogo">
+                <div>
+                    <p class="sobretitulo">NOSSA LOJA</p>
+                    <h2>Produtos em destaque</h2>
+                </div>
+
+                <input
+                    id="pesquisa"
+                    type="search"
+                    placeholder="Buscar produto..."
+                    aria-label="Buscar produto"
+                >
+            </div>
+
+            <div id="gradeProdutos" class="grade-produtos"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 GeekZone — Seu universo geek.</p>
+    </footer>
+
+    <div id="fundoPainel" class="fundo-painel"></div>
+
+    <aside id="painelCarrinho" class="painel-carrinho"
+           aria-label="Carrinho de compras">
+        <div class="carrinho-cabecalho">
+            <h2>🛒 Seu carrinho</h2>
+            <button id="fecharCarrinho" class="fechar"
+                    type="button" aria-label="Fechar carrinho">✕</button>
+        </div>
+
+        <div id="itensCarrinho" class="itens-carrinho">
+            <p class="carrinho-vazio">Seu carrinho está vazio.</p>
+        </div>
+
+        <div class="carrinho-rodape">
+            <div class="linha-total">
+                <span>Total</span>
+                <strong id="totalCarrinho">R$ 0,00</strong>
+            </div>
+
+            <button id="limparCarrinho"
+                    class="botao-secundario largura-total" type="button">
+                Limpar carrinho
+            </button>
+
+            <button id="finalizarCompra"
+                    class="botao-principal largura-total" type="button">
+                Finalizar compra · Pix
+            </button>
+        </div>
+    </aside>
+
+    <!-- GEEKBOT -->
+    <div id="robo-chat">
+        <button id="abrirRobo" type="button"
+                aria-label="Abrir chat com o robô">
+            🤖<span class="robo-notificacao">1</span>
+        </button>
+
+        <section id="janelaRobo" class="robo-oculto"
+                 aria-label="Chat GeekBot">
+            <header class="robo-cabecalho">
+                <div>
+                    <strong>🤖 GeekBot</strong>
+                    <small>Assistente virtual da GeekZone</small>
+                </div>
+                <button id="fecharRobo" type="button"
+                        aria-label="Fechar chat">✕</button>
+            </header>
+
+            <div id="mensagensRobo" aria-live="polite">
+                <div class="mensagem-robo">
+                    Olá! 👋 Sou o GeekBot! Como posso ajudar?
+
+                    Pergunte sobre produtos, frete, Pix ou diga "modo claro".
+                </div>
+            </div>
+
+            <div class="robo-acoes">
+                <button class="robo-sugestao" data-pergunta="frete"
+                        type="button">🚚 Frete</button>
+                <button class="robo-sugestao" data-pergunta="pix"
+                        type="button">💜 Pix</button>
+                <button class="robo-sugestao" data-pergunta="produtos"
+                        type="button">🎮 Produtos</button>
+            </div>
+
+            <form id="formRobo">
+                <input id="entradaRobo" type="text"
+                       placeholder="Digite sua mensagem..."
+                       autocomplete="off"
+                       aria-label="Mensagem para o GeekBot">
+
+                <button type="button" id="falarRobo"
+                        title="Falar por voz" aria-label="Falar por voz">
+                    🎤
+                </button>
+
+                <button type="submit" aria-label="Enviar mensagem">➤</button>
+            </form>
+
+            <p id="statusRobo" aria-live="polite"></p>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

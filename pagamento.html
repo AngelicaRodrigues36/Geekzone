@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Pix | GeekZone</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #100d20;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .pagamento {
+            width: 100%;
+            max-width: 440px;
+            padding: 32px 25px;
+            background: #1d1833;
+            border: 1px solid #493775;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 35px #0005;
+        }
+
+        .logo {
+            color: #c5a1ff;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .icone {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .descricao {
+            color: #c5bfd7;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .valor {
+            background: #2a2145;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .valor p {
+            color: #c5bfd7;
+            margin-bottom: 8px;
+        }
+
+        .valor h2 {
+            color: #c5a1ff;
+            font-size: 32px;
+        }
+
+        .chave {
+            text-align: left;
+            margin-bottom: 18px;
+        }
+
+        .chave label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .chave input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #594786;
+            background: #100d20;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .botao {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 12px;
+            border: 0;
+            border-radius: 9px;
+            background: #9b5cff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .botao:hover {
+            background: #8140e8;
+        }
+
+        .mensagem {
+            min-height: 20px;
+            font-size: 14px;
+            color: #c5a1ff;
+            margin: 10px 0;
+        }
+
+        .aviso {
+            color: #c5bfd7;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 20px;
+        }
+
+        .voltar {
+            display: inline-block;
+            color: #c5a1ff;
+            text-decoration: none;
+            margin-top: 22px;
+        }
+
+        .voltar:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="pagamento">
+        <div class="logo">🎮 GeekZone</div>
+
+        <div class="icone">💠</div>
+
+        <h1>Pagamento via Pix</h1>
+
+        <p class="descricao">
+            Falta pouco para concluir sua compra!
+            Confira o valor e copie a chave Pix abaixo.
+        </p>
+
+        <section class="valor">
+            <p>Valor total da compra</p>
+            <h2 id="valorTotal">R$ 0,00</h2>
+        </section>
+
+        <div class="chave">
+            <label for="chavePix">Chave Pix da GeekZone</label>
+            <input
+                type="text"
+                id="chavePix"
+                value="GEEK_ZONE"
+                readonly
+            >
+        </div>
+
+        <button class="botao" id="copiarPix" type="button">
+            📋 Copiar chave Pix
+        </button>
+
+        <p class="mensagem" id="mensagem" aria-live="polite"></p>
+
+        <p class="aviso">
+            GEEK_ZONE é uma chave demonstrativa.
+            Ela só receberá dinheiro se estiver cadastrada como
+            chave Pix válida em uma instituição financeira.
+            Copiar a chave não cria uma cobrança nem confirma pagamento.
+        </p>
+
+        <a href="index.html" class="voltar">
+            ← Voltar para a loja
+        </a>
+    </main>
+
+    <script>
+        const totalSalvo = localStorage.getItem("geekzone-total");
+        const valor = Number(totalSalvo || 0);
+
+        document.getElementById("valorTotal").textContent =
+            valor.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            });
+
+        document.getElementById("copiarPix").addEventListener(
+            "click",
+            async () => {
+                const chave = "GEEK_ZONE";
+                const mensagem = document.getElementById("mensagem");
+                const campo = document.getElementById("chavePix");
+
+                try {
+                    await navigator.clipboard.writeText(chave);
+                    mensagem.textContent = "Chave demonstrativa copiada!";
+                } catch (erro) {
+                    campo.focus();
+                    campo.select();
+
+                    try {
+                        const copiou = document.execCommand("copy");
+
+                        mensagem.textContent = copiou
+                            ? "Chave demonstrativa copiada!"
+                            : "Selecione e copie a chave manualmente.";
+                    } catch (erroCopia) {
+                        mensagem.textContent =
+                            "Selecione e copie a chave manualmente.";
+                    }
+                }
+            }
+        );
+    </script>
+</body>
+</html>
